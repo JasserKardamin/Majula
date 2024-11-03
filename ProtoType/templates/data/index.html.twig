@@ -18,6 +18,8 @@
                                     <img class="card-img-top" src="{{ asset('assets/images/examlayout.png') }}" alt="..." />
                                 {% elseif element.type is same as("serie") %}
                                     <img class="card-img-top" src="{{ asset('assets/images/TDlayout.png') }}" alt="..." />
+                                {% else %}
+                                     <img class="card-img-top" src="{{ asset('assets/images/courselayout.png') }}" alt="..." />
                                 {% endif %}
                                 <!-- Product details-->
                                 <div class="card-body p-4">

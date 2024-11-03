@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Data;
 use App\Form\DataType;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 //use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,7 +28,7 @@ class DataController extends AbstractController
             return $this->entityManager->createQueryBuilder()
                 ->select('a') 
                 ->from('App\Entity\Data','a')
-                ->setMaxResults(10)
+                ->setMaxResults(8)
                 ->getQuery()
                 ->getResult();
         }
@@ -41,6 +42,42 @@ class DataController extends AbstractController
         return $this->render('data/index.html.twig', [
             'data' => $data,
         ]);
+    }
+
+    #[Route('/data/add', name: 'add_data')]
+    public function add(Request $request ): Response
+    {
+        $data = new data() ;
+        $form = $this->createForm(Datatype::class,$data);
+        $form->handleRequest($request) ; 
+
+        if($form->isSubmitted() && $form->isValid()) {
+            //$otherentity = $form->getData('') ; 
+            $data->setLikes(0) ; 
+
+            $currecnt_date = new DateTime() ; 
+            $data->setPublicationdate($currecnt_date) ; 
+            $data->setApproved(0) ; 
+            $data->setAction("published") ;
+
+
+            $query = $this->entityManager->createQuery('SELECT u FROM App\Entity\User u ORDER BY u.id ASC');
+            $query->setMaxResults(1);
+            $user =  $query->getOneOrNullResult(); 
+            $data->setUser($user);
+
+
+            $this->entityManager->persist($data);
+            $this->entityManager->flush();
+            
+            return $this->redirectToRoute('app_data');
+        }
+
+        return $this->render('data/add.html.twig', [
+             'form' => $form->createView(),
+        ]);
+        
+
     }
 
     #[Route('/data/details/{id}', name: 'show_data_details')]
