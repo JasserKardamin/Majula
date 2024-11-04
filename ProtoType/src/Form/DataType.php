@@ -22,7 +22,7 @@ class DataType extends AbstractType
                     'placeholder' => 'Enter the Title'
                 ]
             ])
-
+            
             ->add('content' , FileType::class, [  
                 'attr' => [
                     'class' => 'file', 
@@ -35,7 +35,7 @@ class DataType extends AbstractType
             ->add('description' ,TextareaType::class, [  
                 'attr' => [
                     'class' => 'input_area', 
-                    'placeholder' => 'Enter the Description',
+                    'placeholder' => 'Enter the Description', 
                     'rows' => 5, 
                     'cols' => 57
                 ]
@@ -47,11 +47,11 @@ class DataType extends AbstractType
                     'placeholder' => 'Enter the Title'
                 ],
                 'label' => 'Class', 'choices' => [
-                     '1A' => '1A',
-                     '2A' => '2A',
-                     '3A' => '3A',
-                     '4A' => '4A',
-                     '5A' => '5A'
+                     '1A' => '1',
+                     '2A' => '2',
+                     '3A' => '3',
+                     '4A' => '4',
+                     '5A' => '5'
                      ], 
                ])
 
@@ -62,9 +62,9 @@ class DataType extends AbstractType
                 ],
                 'label' => 'Type', 'choices' => [
                      'Serie' => 'serie',
-                     'Test' => 'Test',
-                     'Exam' => 'Exam',
-                     'Course' => 'Couse'
+                     'Test' => 'test',
+                     'Exam' => 'exam',
+                     'Course' => 'couse'
                      ], 
                ]) ;
         

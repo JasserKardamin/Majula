@@ -11,15 +11,23 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #d3d3d3;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+.ribon{
+    width: 100%;
+    height: 40vh;
+    background-color: #343a40;
 }
 .container{
     position: relative;
+    bottom: 200px;
     max-width: 900px;
     width: 100%;
     border-radius: 6px;
     padding: 30px;
-    margin: 0 15px;
+    margin: 0 15px ;
     background-color: #fff;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
 }
