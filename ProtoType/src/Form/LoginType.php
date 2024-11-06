@@ -6,20 +6,15 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class UserType extends AbstractType
+class LoginType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('lastname')
-            ->add('firstname')
             ->add('email')
-            ->add('password')
-            ->add('tokens')
-            ->add('type')
-            ->add('status')
-            ->add('isbanned')
+            ->add('password',PasswordType::class)
         ;
     }
 

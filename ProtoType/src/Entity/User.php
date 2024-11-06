@@ -22,7 +22,7 @@ class User
     #[ORM\Column(length: 20)]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 20)]
+    #[ORM\Column(length: 120)]
     private ?string $email = null;
 
     #[ORM\Column(length: 20)]
