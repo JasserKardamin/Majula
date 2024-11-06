@@ -2135,7 +2135,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                   "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com"
                 },
                 {
                     "name": "Symfony Community",
@@ -2148,7 +2148,7 @@
                 "source": "https://github.com/symfony/asset-mapper/tree/v7.1.6"
             },
             "funding": [
-s                {
+                {
                     "url": "https://symfony.com/sponsor",
                     "type": "custom"
                 },

@@ -4,7 +4,6 @@
 {% block data %}
     {% set method_name = app.request.attributes.get('_controller')|split('::')|last %}
     <section class="py-5">
-    
                 {% if method_name ends with 'index' %}
                     <h3 class="display-4 fw-bold">Most Recent</h3>
                 {% elseif  method_name ends with 'myposts' %}
@@ -14,7 +13,6 @@
 <<<<<<< HEAD
                 <div class="container px-4 px-lg-5 mt-5">
                     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-<<<<<<< HEAD
                         {% for element in data %}
                             <div class="col mb-5">
                                 <div class="card h-100">
@@ -69,66 +67,15 @@
                                             <div class="bi-star-fill"></div>
                                             <div class="bi-star-fill"></div>
 >>>>>>> User
-||||||| 57d97cf
-                        {% for element in data %}
-                            <div class="col mb-5">
-                                <div class="card h-100">
-                                    {% if method_name ends with 'index' %}
-                                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">New</div>
-                                    {% endif %}
-                                    {% if element.type is same as("exam") %}
-                                        <img class="card-img-top" src="{{ asset('assets/images/examlayout.png') }}" alt="..." />
-                                    {% elseif element.type is same as("serie") %}
-                                        <img class="card-img-top" src="{{ asset('assets/images/TDlayout.png') }}" alt="..." />
-                                    {% elseif element.type is same as("test") %}
-                                        <img class="card-img-top" src="{{ asset('assets/images/testlayout.png') }}" alt="..." />
-                                    {% else %}
-                                        <img class="card-img-top" src="{{ asset('assets/images/courselayout.png') }}" alt="..." />
-                                    {% endif %}
-                                    <!-- Post details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Post title -->
-                                            <h5 class="fw-bolder">{{ element.title }}</h5>
-                                            <!-- Product reviews -->
-                                            {{ element.publicationdate|date('Y-m-d')}}
-=======
-                        {% if data is empty %}
-                            <h2 style="hieght=20%;">No Results Found .</h2>
-                        {% else %}
-                            {% for element in data %}
-                                <div class="col mb-5">
-                                    <div class="card h-100">
-                                        {% if method_name ends with 'index' %}
-                                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">New</div>
-                                        {% endif %}
-                                        {% if element.type is same as("exam") %}
-                                            <img class="card-img-top" src="{{ asset('images/examlayout.png') }}" alt="..." />
-                                        {% elseif element.type is same as("serie") %}
-                                            <img class="card-img-top" src="{{ asset('images/TDlayout.png') }}" alt="..." />
-                                        {% elseif element.type is same as("test") %}
-                                            <img class="card-img-top" src="{{ asset('images/testlayout.png') }}" alt="..." />
-                                        {% else %}
-                                            <img class="card-img-top" src="{{ asset('images/courselayout.png') }}" alt="..." />
-                                        {% endif %}
-                                        <!-- Post details-->
-                                        <div class="card-body p-4">
-                                            <div class="text-center">
-                                                <!-- Post title -->
-                                                <h5 class="fw-bolder">{{ element.title }}</h5>
-                                                <!-- Product reviews -->
-                                                {{ element.publicationdate|date('Y-m-d')}}
-                                            </div>
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ path('show_data_details', {'id': element.id }) }}">Details</a></div>
->>>>>>> 408a383535f653141dcfc109b47ca3cddd6a82ef
                                         </div>
                                     </div>
+                                    <!-- Product actions-->
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ path('show_data_details', {'id': element.id }) }}">Details</a></div>
+                                    </div>
                                 </div>
-                            {% endfor %}
-                        {% endif %}
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </section>
