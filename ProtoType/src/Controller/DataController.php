@@ -6,6 +6,7 @@ use App\Entity\Data;
 use App\Form\DataType;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use PhpParser\Builder\Method;
 //use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,7 +25,7 @@ class DataController extends AbstractController
     }
 
     private function get_data_page() : array {
-        {
+
             return $this->entityManager->createQueryBuilder()
                 ->select('a') 
                 ->from('App\Entity\Data','a')
@@ -32,11 +33,10 @@ class DataController extends AbstractController
                 ->setMaxResults(8)
                 ->getQuery()
                 ->getResult();
-        }
+
     }
 
     private function get_courses(string $value) : array {
-        {
             return $this->entityManager->createQueryBuilder()
                 ->select('a') 
                 ->from('App\Entity\Data','a')
@@ -44,7 +44,16 @@ class DataController extends AbstractController
                 ->setParameter('type',$value) 
                 ->getQuery()
                 ->getResult();
-        }
+    }
+
+    private function get_courses_title(string $value): array {
+        return $this->entityManager->createQueryBuilder()
+            ->select('d')
+            ->from('App\Entity\Data', 'd')
+            ->where('d.title LIKE :searchvalue') 
+            ->setParameter('searchvalue', '%' . $value . '%') 
+            ->getQuery()
+            ->getResult();
     }
     
     #[Route('/data', name: 'app_data')]
@@ -159,6 +168,40 @@ class DataController extends AbstractController
             'data' => $data,
         ]);
     }
+
+    #[Route('/data/search', name: 'data_search')]
+    public function search(Request $request ): Response
+    {
+        $data = []; 
+        $search_value = '' ;
+        
+        
+        if ($request->isMethod('POST')) {
+            $search_value = $request->request->get('search_value');
+
+            if($search_value == '' ) {
+                return $this->redirectToRoute('app_data');
+            }
+
+            $data = $this->get_courses_title($search_value);
+        }
+        return $this->render('data/index.html.twig', [
+            'data' => $data,
+            'searchvalue' => $search_value
+
+        ]);
+    }
+
+    #[Route('/data/suggest', name: 'data_suggest')]
+    public function suggest(Request $request): JsonResponse
+    {
+        $query = $request->query->get('query'); 
+        $suggestions = $this->get_courses_title($query); 
+        $result = array_map(fn($item) => ['title' => $item->getTitle()], $suggestions); 
+
+        return new JsonResponse($result); 
+    }
+
 
 
 
